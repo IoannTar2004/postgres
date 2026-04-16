@@ -61,6 +61,7 @@
 #include "executor/executor.h"
 #include "executor/instrument.h"
 #include "executor/nodeModifyTable.h"
+#include "executor/jsonb_hot.h"
 #include "foreign/fdwapi.h"
 #include "miscadmin.h"
 #include "nodes/nodeFuncs.h"
@@ -2764,6 +2765,9 @@ ExecUpdate(ModifyTableContext *context, ResultRelInfo *resultRelInfo,
 	if (!ExecUpdatePrologue(context, resultRelInfo, tupleid, oldtuple, slot, NULL))
 		return NULL;
 
+    if (!resultRelInfo->ri_jsonUpdatePathInfo->checked)
+        compare_paths_and_indexes(resultRelInfo->ri_jsonUpdatePathInfo, resultRelInfo);
+
 	/* INSTEAD OF ROW UPDATE Triggers */
 	if (resultRelInfo->ri_TrigDesc &&
 		resultRelInfo->ri_TrigDesc->trig_update_instead_row)
@@ -5103,6 +5107,7 @@ ExecInitModifyTable(ModifyTable *node, EState *estate, int eflags)
 	/* check for unsupported flags */
 	Assert(!(eflags & (EXEC_FLAG_BACKWARD | EXEC_FLAG_MARK)));
 
+
 	/*
 	 * Only consider unpruned relations for initializing their ResultRelInfo
 	 * struct and other fields such as withCheckOptions, etc.
@@ -5769,6 +5774,9 @@ ExecInitModifyTable(ModifyTable *node, EState *estate, int eflags)
 	if (!mtstate->canSetTag)
 		estate->es_auxmodifytables = lcons(mtstate,
 										   estate->es_auxmodifytables);
+
+        mtstate->resultRelInfo->ri_jsonUpdatePathInfo =
+                jsonb_update_paths_checks(subplan->targetlist, rel->rd_id);
 
 	return mtstate;
 }

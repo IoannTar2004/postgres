@@ -50,6 +50,7 @@
 #include "executor/execPartition.h"
 #include "executor/instrument.h"
 #include "executor/nodeSubplan.h"
+#include "executor/jsonb_hot.h"
 #include "foreign/fdwapi.h"
 #include "mb/pg_wchar.h"
 #include "miscadmin.h"

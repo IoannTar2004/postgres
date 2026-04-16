@@ -1,0 +1,13 @@
+drop table testt;
+create table testt (id serial primary key, info jsonb not null, col int not null );
+create index on testt ((info->>'first'));
+insert into testt (info, col) values ('{"first": "haha"}', 10);
+-- update testt set col = 40;
+-- update testt set info = jsonb_set(info, '{first}', '"wefwef112323"');
+-- update testt set info = jsonb_set(info, '{first}', '"wefwef1123"');
+-- update testt set info = jsonb_set(info, '{second}', '"wefwef1123231"');
+-- update testt set info = jsonb_set(info, '{first}', '"wefwef1123ed"');
+-- UPDATE testt SET info = jsonb_set(info, '{first}', to_jsonb(random()::text));
+-- update testt set info = jsonb_set(info, '{second}', '"wefwef11"');
+-- update testt set info = jsonb_set(info, '{second}', '"wefwef112323"');
+SELECT * FROM heap_page('testt',0);

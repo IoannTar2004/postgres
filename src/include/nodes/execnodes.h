@@ -31,6 +31,7 @@
 
 #include "access/htup.h"
 #include "executor/instrument_node.h"
+#include "executor/jsonb_hot.h"
 #include "fmgr.h"
 #include "lib/ilist.h"
 #include "nodes/miscnodes.h"
@@ -49,6 +50,7 @@ typedef struct BufferUsage BufferUsage;
 typedef struct ExecRowMark ExecRowMark;
 typedef struct ExprState ExprState;
 typedef struct ExprContext ExprContext;
+typedef struct JsonbUpdatePathsInfo JsonbUpdatePathsInfo;
 typedef struct HTAB HTAB;
 typedef struct Instrumentation Instrumentation;
 typedef struct pairingheap pairingheap;
@@ -662,6 +664,9 @@ typedef struct ResultRelInfo
 	 * one of its ancestors; see ExecCrossPartitionUpdateForeignKey().
 	 */
 	List	   *ri_ancestorResultRels;
+
+    JsonbUpdatePathsInfo* ri_jsonUpdatePathInfo;
+
 } ResultRelInfo;
 
 /* ----------------

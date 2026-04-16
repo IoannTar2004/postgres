@@ -32,6 +32,7 @@ OBJS = \
 	execUtils.o \
 	functions.o \
 	instrument.o \
+	jsonb_hot.o \
 	nodeAgg.o \
 	nodeAppend.o \
 	nodeBitmapAnd.o \

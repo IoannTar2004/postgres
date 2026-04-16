@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="postgres" targetName="show_dl_suffix" />
+      <config projectName="postgres" targetName="uninstall" />
+      <config projectName="postgres" targetName="installcheck-tests" />
+      <config projectName="postgres" targetName="install-world" />
+      <config projectName="postgres" targetName="check-tests" />
+      <config projectName="postgres" targetName="install-docs" />
+      <config projectName="postgres" targetName="uninstall-config-recurse" />
+      <config projectName="postgres" targetName="update-po" />
+      <config projectName="postgres" targetName="maintainer-clean" />
+      <config projectName="postgres" targetName="cpluspluscheck" />
+      <config projectName="postgres" targetName="GNUmakefile" />
+      <config projectName="postgres" targetName="installdirs-src-recurse" />
+      <config projectName="postgres" targetName="submake-libpgport" />
+      <config projectName="postgres" targetName="all" />
+      <config projectName="postgres" targetName="clean-config-recurse" />
+      <config projectName="postgres" targetName="world-bin-config-recurse" />
+      <config projectName="postgres" targetName="world-config-recurse" />
+      <config projectName="postgres" targetName="installcheck" />
+      <config projectName="postgres" targetName="installcheck-world-contrib-recurse" />
+      <config projectName="postgres" targetName="installdirs-doc-recurse" />
+      <config projectName="postgres" targetName="coverage-config-recurse" />
+      <config projectName="postgres" targetName="distcheck" />
+      <config projectName="postgres" targetName="all-config-recurse" />
+      <config projectName="postgres" targetName="install-world-bin-src-recurse" />
+      <config projectName="postgres" targetName="world" />
+      <config projectName="postgres" targetName="install-world-bin-contrib-recurse" />
+      <config projectName="postgres" targetName="coverage-contrib-recurse" />
+      <config projectName="postgres" targetName="checkprep-contrib-recurse" />
+      <config projectName="postgres" targetName="install-world-config-recurse" />
+      <config projectName="postgres" targetName="clean-doc-recurse" />
+      <config projectName="postgres" targetName="install-world-contrib-recurse" />
+      <config projectName="postgres" targetName="update-po-src-recurse" />
+      <config projectName="postgres" targetName="install" />
+      <config projectName="postgres" targetName="installcheck-world" />
+      <config projectName="postgres" targetName="install-tests" />
+      <config projectName="postgres" targetName="install-strip" />
+      <config projectName="postgres" targetName="check-world" />
+      <config projectName="postgres" targetName="coverage-src-recurse" />
+      <config projectName="postgres" targetName="installdirs-config-recurse" />
+      <config projectName="postgres" targetName="submake-libpgfeutils" />
+      <config projectName="postgres" targetName="install-world-src-recurse" />
+      <config projectName="postgres" targetName="distdir-location" />
+      <config projectName="postgres" targetName="dist" />
+      <config projectName="postgres" targetName="clean-src-recurse" />
+      <config projectName="postgres" targetName="install-src-recurse" />
+      <config projectName="postgres" targetName="temp-install" />
+      <config projectName="postgres" targetName="update-po-doc-recurse" />
+      <config projectName="postgres" targetName="update-unicode" />
+      <config projectName="postgres" targetName="uninstall-doc-recurse" />
+      <config projectName="postgres" targetName="check-world-contrib-recurse" />
+      <config projectName="postgres" targetName="html" />
+      <config projectName="postgres" targetName="configure" />
+      <config projectName="postgres" targetName="install-world-bin" />
+      <config projectName="postgres" targetName="coverage" />
+      <config projectName="postgres" targetName="installdirs" />
+      <config projectName="postgres" targetName="man" />
+      <config projectName="postgres" targetName="clean-contrib-recurse" />
+      <config projectName="postgres" targetName="submake-generated-headers" />
+      <config projectName="postgres" targetName="check" />
+      <config projectName="postgres" targetName="postgres" />
+      <config projectName="postgres" targetName="init-po-src-recurse" />
+      <config projectName="postgres" targetName="world-bin-contrib-recurse" />
+      <config projectName="postgres" targetName="world-bin" />
+      <config projectName="postgres" targetName="all-src-recurse" />
+      <config projectName="postgres" targetName="coverage-doc-recurse" />
+      <config projectName="postgres" targetName="docs" />
+      <config projectName="postgres" targetName="install-config-recurse" />
+      <config projectName="postgres" targetName="installcheck-parallel" />
+      <config projectName="postgres" targetName="install-world-bin-config-recurse" />
+      <config projectName="postgres" targetName="distclean" />
+      <config projectName="postgres" targetName="uninstall-src-recurse" />
+      <config projectName="postgres" targetName="headerscheck" />
+      <config projectName="postgres" targetName="world-doc-recurse" />
+      <config projectName="postgres" targetName="world-contrib-recurse" />
+      <config projectName="postgres" targetName="init-po-doc-recurse" />
+      <config projectName="postgres" targetName="init-po" />
+      <config projectName="postgres" targetName="submake-libpq" />
+      <config projectName="postgres" targetName="install-world-doc-recurse" />
+      <config projectName="postgres" targetName="update-po-config-recurse" />
+      <config projectName="postgres" targetName="world-bin-src-recurse" />
+      <config projectName="postgres" targetName="checkprep" />
+      <config projectName="postgres" targetName="init-po-config-recurse" />
+      <config projectName="postgres" targetName="world-src-recurse" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/executor/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/executor/execMain.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/execMain.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/executor/meson.build" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/meson.build" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/executor/nodeModifyTable.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/nodeModifyTable.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/utils/adt/jsonb.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/utils/adt/jsonb.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/nodes/execnodes.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/nodes/execnodes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/utils/rel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/utils/rel.h" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MakefileLocalSettings">
+    <option name="toolchainName" value="WSL" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2.2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="38iOZ5GwLtygmSFlgZg5ezwQLCY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ATTACH_DIALOG_SELECTED_HOST&quot;: &quot;\\\\wsl$\\Ubuntu\\&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/jsonb__hot__update__patch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl$/Ubuntu/home/ivan_kanga/univer/diplom/postgres/compile_commands.json&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CLionExternalConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Space Code Reviews" show_stripe_button="false" />
+      <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
+      <window_info id="Merge Requests" show_stripe_button="false" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="Pull Requests" show_stripe_button="false" />
+      <window_info id="Learn" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26443002" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Profiler" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="RunManager" selected="Makefile Application.all">
+    <configuration name="GNUmakefile" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="GNUmakefile" CONFIG_NAME="GNUmakefile" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="all-config-recurse" CONFIG_NAME="all-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="all-src-recurse" CONFIG_NAME="all-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="all" CONFIG_NAME="all" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="check-tests" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="check-tests" CONFIG_NAME="check-tests" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="check-world-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="check-world-contrib-recurse" CONFIG_NAME="check-world-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="check-world" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="check-world" CONFIG_NAME="check-world" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="check" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="check" CONFIG_NAME="check" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="checkprep-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="checkprep-contrib-recurse" CONFIG_NAME="checkprep-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="checkprep" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="checkprep" CONFIG_NAME="checkprep" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="clean-config-recurse" CONFIG_NAME="clean-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="clean-contrib-recurse" CONFIG_NAME="clean-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="clean-doc-recurse" CONFIG_NAME="clean-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="clean-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="clean-src-recurse" CONFIG_NAME="clean-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="configure" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="configure" CONFIG_NAME="configure" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coverage-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="coverage-config-recurse" CONFIG_NAME="coverage-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coverage-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="coverage-contrib-recurse" CONFIG_NAME="coverage-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coverage-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="coverage-doc-recurse" CONFIG_NAME="coverage-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coverage-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="coverage-src-recurse" CONFIG_NAME="coverage-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="coverage" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="coverage" CONFIG_NAME="coverage" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="cpluspluscheck" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="cpluspluscheck" CONFIG_NAME="cpluspluscheck" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="dist" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="dist" CONFIG_NAME="dist" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="distcheck" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="distcheck" CONFIG_NAME="distcheck" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="distclean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="distclean" CONFIG_NAME="distclean" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="distdir-location" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="distdir-location" CONFIG_NAME="distdir-location" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="docs" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="docs" CONFIG_NAME="docs" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="headerscheck" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="headerscheck" CONFIG_NAME="headerscheck" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="html" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="html" CONFIG_NAME="html" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="init-po-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="init-po-config-recurse" CONFIG_NAME="init-po-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="init-po-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="init-po-doc-recurse" CONFIG_NAME="init-po-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="init-po-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="init-po-src-recurse" CONFIG_NAME="init-po-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="init-po" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="init-po" CONFIG_NAME="init-po" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-config-recurse" CONFIG_NAME="install-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-docs" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-docs" CONFIG_NAME="install-docs" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-src-recurse" CONFIG_NAME="install-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-strip" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-strip" CONFIG_NAME="install-strip" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-tests" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-tests" CONFIG_NAME="install-tests" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-bin-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-bin-config-recurse" CONFIG_NAME="install-world-bin-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-bin-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-bin-contrib-recurse" CONFIG_NAME="install-world-bin-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-bin-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-bin-src-recurse" CONFIG_NAME="install-world-bin-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-bin" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-bin" CONFIG_NAME="install-world-bin" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-config-recurse" CONFIG_NAME="install-world-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-contrib-recurse" CONFIG_NAME="install-world-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-doc-recurse" CONFIG_NAME="install-world-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world-src-recurse" CONFIG_NAME="install-world-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install-world" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install-world" CONFIG_NAME="install-world" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="install" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="install" CONFIG_NAME="install" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installcheck-parallel" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installcheck-parallel" CONFIG_NAME="installcheck-parallel" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installcheck-tests" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installcheck-tests" CONFIG_NAME="installcheck-tests" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installcheck-world-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installcheck-world-contrib-recurse" CONFIG_NAME="installcheck-world-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installcheck-world" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installcheck-world" CONFIG_NAME="installcheck-world" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installcheck" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installcheck" CONFIG_NAME="installcheck" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installdirs-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installdirs-config-recurse" CONFIG_NAME="installdirs-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installdirs-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installdirs-doc-recurse" CONFIG_NAME="installdirs-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installdirs-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installdirs-src-recurse" CONFIG_NAME="installdirs-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="installdirs" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="installdirs" CONFIG_NAME="installdirs" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="maintainer-clean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="maintainer-clean" CONFIG_NAME="maintainer-clean" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="man" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="man" CONFIG_NAME="man" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="show_dl_suffix" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="show_dl_suffix" CONFIG_NAME="show_dl_suffix" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="submake-generated-headers" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="submake-generated-headers" CONFIG_NAME="submake-generated-headers" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="submake-libpgfeutils" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="submake-libpgfeutils" CONFIG_NAME="submake-libpgfeutils" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="submake-libpgport" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="submake-libpgport" CONFIG_NAME="submake-libpgport" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="submake-libpq" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="submake-libpq" CONFIG_NAME="submake-libpq" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="temp-install" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="temp-install" CONFIG_NAME="temp-install" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="uninstall-config-recurse" CONFIG_NAME="uninstall-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="uninstall-doc-recurse" CONFIG_NAME="uninstall-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="uninstall-src-recurse" CONFIG_NAME="uninstall-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="uninstall" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="uninstall" CONFIG_NAME="uninstall" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="update-po-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="update-po-config-recurse" CONFIG_NAME="update-po-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="update-po-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="update-po-doc-recurse" CONFIG_NAME="update-po-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="update-po-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="update-po-src-recurse" CONFIG_NAME="update-po-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="update-po" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="update-po" CONFIG_NAME="update-po" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="update-unicode" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="update-unicode" CONFIG_NAME="update-unicode" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-bin-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-bin-config-recurse" CONFIG_NAME="world-bin-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-bin-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-bin-contrib-recurse" CONFIG_NAME="world-bin-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-bin-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-bin-src-recurse" CONFIG_NAME="world-bin-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-bin" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-bin" CONFIG_NAME="world-bin" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-config-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-config-recurse" CONFIG_NAME="world-config-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-contrib-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-contrib-recurse" CONFIG_NAME="world-contrib-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-doc-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-doc-recurse" CONFIG_NAME="world-doc-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world-src-recurse" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world-src-recurse" CONFIG_NAME="world-src-recurse" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="world" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="world" CONFIG_NAME="world" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="postgres" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="postgres" TARGET_NAME="postgres" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="postgres" RUN_TARGET_NAME="postgres">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.postgres" />
+      <item itemvalue="Makefile Application.all" />
+      <item itemvalue="Makefile Application.all-config-recurse" />
+      <item itemvalue="Makefile Application.all-src-recurse" />
+      <item itemvalue="Makefile Application.check" />
+      <item itemvalue="Makefile Application.check-world" />
+      <item itemvalue="Makefile Application.check-world-contrib-recurse" />
+      <item itemvalue="Makefile Application.checkprep" />
+      <item itemvalue="Makefile Application.checkprep-contrib-recurse" />
+      <item itemvalue="Makefile Application.clean-config-recurse" />
+      <item itemvalue="Makefile Application.clean-contrib-recurse" />
+      <item itemvalue="Makefile Application.clean-doc-recurse" />
+      <item itemvalue="Makefile Application.clean-src-recurse" />
+      <item itemvalue="Makefile Application.coverage" />
+      <item itemvalue="Makefile Application.coverage-config-recurse" />
+      <item itemvalue="Makefile Application.coverage-contrib-recurse" />
+      <item itemvalue="Makefile Application.coverage-doc-recurse" />
+      <item itemvalue="Makefile Application.coverage-src-recurse" />
+      <item itemvalue="Makefile Application.cpluspluscheck" />
+      <item itemvalue="Makefile Application.dist" />
+      <item itemvalue="Makefile Application.distcheck" />
+      <item itemvalue="Makefile Application.distclean" />
+      <item itemvalue="Makefile Application.docs" />
+      <item itemvalue="Makefile Application.headerscheck" />
+      <item itemvalue="Makefile Application.html" />
+      <item itemvalue="Makefile Application.init-po" />
+      <item itemvalue="Makefile Application.init-po-config-recurse" />
+      <item itemvalue="Makefile Application.init-po-doc-recurse" />
+      <item itemvalue="Makefile Application.init-po-src-recurse" />
+      <item itemvalue="Makefile Application.install" />
+      <item itemvalue="Makefile Application.install-config-recurse" />
+      <item itemvalue="Makefile Application.install-docs" />
+      <item itemvalue="Makefile Application.install-src-recurse" />
+      <item itemvalue="Makefile Application.install-strip" />
+      <item itemvalue="Makefile Application.install-world" />
+      <item itemvalue="Makefile Application.install-world-bin-config-recurse" />
+      <item itemvalue="Makefile Application.install-world-bin-contrib-recurse" />
+      <item itemvalue="Makefile Application.install-world-bin-src-recurse" />
+      <item itemvalue="Makefile Application.install-world-config-recurse" />
+      <item itemvalue="Makefile Application.install-world-contrib-recurse" />
+      <item itemvalue="Makefile Application.install-world-doc-recurse" />
+      <item itemvalue="Makefile Application.install-world-src-recurse" />
+      <item itemvalue="Makefile Application.installcheck" />
+      <item itemvalue="Makefile Application.installcheck-parallel" />
+      <item itemvalue="Makefile Application.installcheck-world" />
+      <item itemvalue="Makefile Application.installcheck-world-contrib-recurse" />
+      <item itemvalue="Makefile Application.installdirs" />
+      <item itemvalue="Makefile Application.installdirs-config-recurse" />
+      <item itemvalue="Makefile Application.installdirs-doc-recurse" />
+      <item itemvalue="Makefile Application.installdirs-src-recurse" />
+      <item itemvalue="Makefile Application.maintainer-clean" />
+      <item itemvalue="Makefile Application.man" />
+      <item itemvalue="Makefile Application.show_dl_suffix" />
+      <item itemvalue="Makefile Application.submake-generated-headers" />
+      <item itemvalue="Makefile Application.submake-libpgfeutils" />
+      <item itemvalue="Makefile Application.submake-libpgport" />
+      <item itemvalue="Makefile Application.submake-libpq" />
+      <item itemvalue="Makefile Application.temp-install" />
+      <item itemvalue="Makefile Application.uninstall" />
+      <item itemvalue="Makefile Application.uninstall-config-recurse" />
+      <item itemvalue="Makefile Application.uninstall-doc-recurse" />
+      <item itemvalue="Makefile Application.uninstall-src-recurse" />
+      <item itemvalue="Makefile Application.update-po" />
+      <item itemvalue="Makefile Application.update-po-config-recurse" />
+      <item itemvalue="Makefile Application.update-po-doc-recurse" />
+      <item itemvalue="Makefile Application.update-po-src-recurse" />
+      <item itemvalue="Makefile Application.update-unicode" />
+      <item itemvalue="Makefile Application.world" />
+      <item itemvalue="Makefile Application.world-bin-config-recurse" />
+      <item itemvalue="Makefile Application.world-bin-contrib-recurse" />
+      <item itemvalue="Makefile Application.world-bin-src-recurse" />
+      <item itemvalue="Makefile Application.world-config-recurse" />
+      <item itemvalue="Makefile Application.world-contrib-recurse" />
+      <item itemvalue="Makefile Application.world-doc-recurse" />
+      <item itemvalue="Makefile Application.world-src-recurse" />
+      <item itemvalue="Makefile Application.check-tests" />
+      <item itemvalue="Makefile Application.configure" />
+      <item itemvalue="Makefile Application.distdir-location" />
+      <item itemvalue="Makefile Application.GNUmakefile" />
+      <item itemvalue="Makefile Application.install-tests" />
+      <item itemvalue="Makefile Application.install-world-bin" />
+      <item itemvalue="Makefile Application.installcheck-tests" />
+      <item itemvalue="Makefile Application.world-bin" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="" />
+      <created>1769278979568</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769278979568</updated>
+      <workItem from="1769278983010" duration="5235000" />
+      <workItem from="1771405472291" duration="5777000" />
+      <workItem from="1771618364544" duration="19000" />
+      <workItem from="1771957427593" duration="7979000" />
+      <workItem from="1772010237054" duration="7620000" />
+      <workItem from="1772023291604" duration="6273000" />
+      <workItem from="1772102389323" duration="1689000" />
+      <workItem from="1772121961579" duration="530000" />
+      <workItem from="1773217871471" duration="636000" />
+      <workItem from="1773440195655" duration="3984000" />
+      <workItem from="1773495357366" duration="4300000" />
+      <workItem from="1773560099346" duration="3318000" />
+      <workItem from="1773592855554" duration="4089000" />
+      <workItem from="1773649856003" duration="4090000" />
+      <workItem from="1775743883632" duration="747000" />
+      <workItem from="1775744857601" duration="464000" />
+      <workItem from="1775816801261" duration="1898000" />
+      <workItem from="1775822936997" duration="9506000" />
+      <workItem from="1775946802217" duration="503000" />
+      <workItem from="1775980270428" duration="3324000" />
+      <workItem from="1776002091125" duration="1530000" />
+      <workItem from="1776019011222" duration="9096000" />
+      <workItem from="1776068240054" duration="4717000" />
+      <workItem from="1776081567180" duration="3559000" />
+      <workItem from="1776117207863" duration="4072000" />
+      <workItem from="1776152697422" duration="6886000" />
+      <workItem from="1776160512759" duration="91000" />
+      <workItem from="1776160607497" duration="131000" />
+      <workItem from="1776160751708" duration="392000" />
+      <workItem from="1776168845246" duration="849000" />
+      <workItem from="1776169714545" duration="109000" />
+      <workItem from="1776169827097" duration="334000" />
+      <workItem from="1776170195697" duration="31000" />
+      <workItem from="1776170233229" duration="81000" />
+      <workItem from="1776170343717" duration="253000" />
+      <workItem from="1776170655428" duration="19000" />
+      <workItem from="1776170681678" duration="1077000" />
+      <workItem from="1776171950616" duration="187000" />
+      <workItem from="1776172585162" duration="643000" />
+      <workItem from="1776173247142" duration="58000" />
+      <workItem from="1776173316447" duration="620000" />
+      <workItem from="1776178780884" duration="1249000" />
+      <workItem from="1776180061994" duration="411000" />
+      <workItem from="1776180493282" duration="117000" />
+      <workItem from="1776180622075" duration="151000" />
+      <workItem from="1776180778718" duration="30000" />
+      <workItem from="1776180820543" duration="2040000" />
+      <workItem from="1776189201364" duration="3621000" />
+      <workItem from="1776194851764" duration="2480000" />
+      <workItem from="1776239781552" duration="11182000" />
+      <workItem from="1776254381490" duration="10674000" />
+      <workItem from="1776269364602" duration="895000" />
+      <workItem from="1776274630064" duration="3067000" />
+      <workItem from="1776291024416" duration="6116000" />
+      <workItem from="1776325360207" duration="12929000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="executable:kubectl" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/access/heap/heapam.c</url>
+          <line>3978</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
+          <line>83</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="postgres">
+        <watch expression="DatumGetArrayTypeP($c)" />
+        <watch expression="(TargetEntry *)(query-&gt;targetList-&gt;elements[0])" />
+        <watch expression="$c-&gt;constvalue" />
+        <watch expression="(Node*)query-&gt;targetList-&gt;elements[0]" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

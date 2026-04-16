@@ -20,6 +20,7 @@ backend_sources += files(
   'execUtils.c',
   'functions.c',
   'instrument.c',
+  'jsonb_hot.c',
   'nodeAgg.c',
   'nodeAppend.c',
   'nodeBitmapAnd.c',
