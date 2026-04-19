@@ -1,7 +1,7 @@
 drop table testt;
 create table testt (id serial primary key, info jsonb not null, col int not null );
 create index on testt ((info->>'first'));
-insert into testt (info, col) values ('{"first": "haha"}', 10);
+-- insert into testt (info, col) values ('{"first": "haha"}', 10);
 -- update testt set col = 40;
 -- update testt set info = jsonb_set(info, '{first}', '"wefwef112323"');
 -- update testt set info = jsonb_set(info, '{first}', '"wefwef1123"');

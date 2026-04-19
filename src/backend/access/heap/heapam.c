@@ -3201,7 +3201,7 @@ TM_Result
 heap_update(Relation relation, const ItemPointerData *otid, HeapTuple newtup,
 			CommandId cid, uint32 options pg_attribute_unused(), Snapshot crosscheck, bool wait,
 			TM_FailureData *tmfd, LockTupleMode *lockmode,
-			TU_UpdateIndexes *update_indexes)
+			TU_UpdateIndexes *update_indexes, Bitmapset* jsonb_update_attrs)
 {
 	TM_Result	result;
 	TransactionId xid = GetCurrentTransactionId();
@@ -3382,6 +3382,13 @@ heap_update(Relation relation, const ItemPointerData *otid, HeapTuple newtup,
 	modified_attrs = HeapDetermineColumnsInfo(relation, interesting_attrs,
 											  id_attrs, &oldtup,
 											  newtup, &id_has_external);
+
+    if (modified_attrs && jsonb_update_attrs) {
+        modified_attrs->words[0] &= ~(jsonb_update_attrs->words[0]);
+        if (modified_attrs->words[0] == 0)
+            modified_attrs = NULL;
+    }
+
 
 	/*
 	 * If we're not updating any "key" column, we can grab a weaker lock type.
@@ -4458,7 +4465,7 @@ simple_heap_update(Relation relation, const ItemPointerData *otid, HeapTuple tup
 						 GetCurrentCommandId(true), 0,
 						 InvalidSnapshot,
 						 true /* wait for commit */ ,
-						 &tmfd, &lockmode, update_indexes);
+						 &tmfd, &lockmode, update_indexes, NULL);
 	switch (result)
 	{
 		case TM_SelfModified:

@@ -225,7 +225,7 @@ heapam_tuple_update(Relation relation, ItemPointer otid, TupleTableSlot *slot,
 					CommandId cid, uint32 options,
 					Snapshot snapshot, Snapshot crosscheck,
 					bool wait, TM_FailureData *tmfd,
-					LockTupleMode *lockmode, TU_UpdateIndexes *update_indexes)
+					LockTupleMode *lockmode, TU_UpdateIndexes *update_indexes, Bitmapset* jsonb_update_attrs)
 {
 	bool		shouldFree = true;
 	HeapTuple	tuple = ExecFetchSlotHeapTuple(slot, true, &shouldFree);
@@ -236,8 +236,8 @@ heapam_tuple_update(Relation relation, ItemPointer otid, TupleTableSlot *slot,
 	tuple->t_tableOid = slot->tts_tableOid;
 
 	result = heap_update(relation, otid, tuple, cid, options,
-						 crosscheck, wait,
-						 tmfd, lockmode, update_indexes);
+                         crosscheck, wait,
+                         tmfd, lockmode, update_indexes, jsonb_update_attrs);
 	ItemPointerCopy(&tuple->t_self, &slot->tts_tid);
 
 	/*

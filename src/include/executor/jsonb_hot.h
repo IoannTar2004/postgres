@@ -15,6 +15,7 @@ typedef struct JsonbUpdatePaths {
  */
 typedef struct JsonbUpdatePathsInfo {
     List* args;
+    Bitmapset* bitmapset;
     bool checked;
 } JsonbUpdatePathsInfo;
 

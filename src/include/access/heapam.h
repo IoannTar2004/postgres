@@ -389,7 +389,7 @@ extern TM_Result heap_update(Relation relation, const ItemPointerData *otid,
 							 CommandId cid, uint32 options,
 							 Snapshot crosscheck, bool wait,
 							 TM_FailureData *tmfd, LockTupleMode *lockmode,
-							 TU_UpdateIndexes *update_indexes);
+							 TU_UpdateIndexes *update_indexes, Bitmapset *jsonb_hot_attrs);
 extern TM_Result heap_lock_tuple(Relation relation, HeapTuple tuple,
 								 CommandId cid, LockTupleMode mode, LockWaitPolicy wait_policy,
 								 bool follow_updates,

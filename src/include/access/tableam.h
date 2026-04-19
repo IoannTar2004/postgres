@@ -21,6 +21,7 @@
 #include "access/sdir.h"
 #include "access/xact.h"
 #include "executor/tuptable.h"
+#include "executor/jsonb_hot.h"
 #include "storage/read_stream.h"
 #include "utils/rel.h"
 #include "utils/snapshot.h"
@@ -586,7 +587,8 @@ typedef struct TableAmRoutine
 								 bool wait,
 								 TM_FailureData *tmfd,
 								 LockTupleMode *lockmode,
-								 TU_UpdateIndexes *update_indexes);
+								 TU_UpdateIndexes *update_indexes,
+                                 Bitmapset *jsonb_update_attrs);
 
 	/* see table_tuple_lock() for reference about parameters */
 	TM_Result	(*tuple_lock) (Relation rel,
@@ -1601,12 +1603,12 @@ table_tuple_update(Relation rel, ItemPointer otid, TupleTableSlot *slot,
 				   CommandId cid, uint32 options,
 				   Snapshot snapshot, Snapshot crosscheck,
 				   bool wait, TM_FailureData *tmfd, LockTupleMode *lockmode,
-				   TU_UpdateIndexes *update_indexes)
+				   TU_UpdateIndexes *update_indexes, Bitmapset* jsonb_update_attrs)
 {
 	return rel->rd_tableam->tuple_update(rel, otid, slot,
-										 cid, options, snapshot, crosscheck,
-										 wait, tmfd,
-										 lockmode, update_indexes);
+                                         cid, options, snapshot, crosscheck,
+                                         wait, tmfd,
+                                         lockmode, update_indexes, jsonb_update_attrs);
 }
 
 /*

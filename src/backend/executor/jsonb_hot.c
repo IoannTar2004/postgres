@@ -13,7 +13,7 @@
 #define JSONB_OBJECT_FIELD_TEXT_ID 3214
 
 static char* get_jsonb_path_string(Const* const_object);
-static void try_to_modify_hotattrs(List* modify_paths, Const* aConst, Bitmapset* hotattrs);
+static void try_to_modify_attrs(List* modify_paths, Const* aConst, Bitmapset** bitmapset);
 
 JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
     JsonbUpdatePathsInfo* jbInfo = palloc(sizeof(JsonbUpdatePathsInfo));
@@ -53,8 +53,10 @@ static char* get_jsonb_path_string(Const* const_object) {
 }
 
 void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relInfo) {
+    Bitmapset* bitmapset = NULL;
     if (!relInfo->ri_IndexRelationDescs)
         return;
+    
 
     for (int i = 0; i < relInfo->ri_NumIndices; ++i) {
         List* indexprs = relInfo->ri_IndexRelationDescs[i]->rd_indexprs;
@@ -69,24 +71,21 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
 
             Node* optional_const = (Node*) lsecond(opExpr->args);
             if (optional_const->type == T_Const) {
-                try_to_modify_hotattrs(jbInfo->args, (Const*) optional_const, relInfo->ri_RelationDesc->rd_hotblockingattr);
+                try_to_modify_attrs(jbInfo->args, (Const *) optional_const, &bitmapset);
             }
         }
     }
 
     jbInfo->checked = true;
+    jbInfo->bitmapset = bitmapset;
 }
 
-static void try_to_modify_hotattrs(List* modify_paths, Const* aConst, Bitmapset* hotattrs) {
-    if (!hotattrs)
-        return;
-
+static void try_to_modify_attrs(List* modify_paths, Const* aConst, Bitmapset** bitmapset) {
     char* index_path = text_to_cstring(DatumGetPointer(aConst->constvalue));
     ListCell* lc;
     foreach(lc, modify_paths) {
         JsonbUpdatePaths* path = (JsonbUpdatePaths*) lfirst(lc);
-        if (strcmp(index_path, path->paths)) {
-            hotattrs = bms_del_member(hotattrs, path->colnum + 7);
-        }
+        if (strcmp(index_path, path->paths))
+            *bitmapset = bms_add_member(*bitmapset, path->colnum + 7);
     }
 }
