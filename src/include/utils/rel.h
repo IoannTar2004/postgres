@@ -35,6 +35,8 @@
  * to declare them here so we can have a LockInfoData field in a Relation.
  */
 
+typedef struct JsonbUpdatePathsInfo JsonbUpdatePathsInfo;
+
 typedef struct LockRelId
 {
 	Oid			relId;			/* a relation identifier */
@@ -210,6 +212,7 @@ typedef struct RelationData
 	struct FmgrInfo *rd_supportinfo;	/* lookup info for support procedures */
 	int16	   *rd_indoption;	/* per-column AM-specific flags */
 	List	   *rd_indexprs;	/* index expression trees, if any */
+    List *rd_jsonbIndexPathsInfo; /* TODO */
 	List	   *rd_indpred;		/* index predicate tree, if any */
 	Oid		   *rd_exclops;		/* OIDs of exclusion operators, if any */
 	Oid		   *rd_exclprocs;	/* OIDs of exclusion ops' procs, if any */

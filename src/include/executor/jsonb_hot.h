@@ -3,9 +3,10 @@
 
 #include "nodes/execnodes.h"
 #include "nodes/pg_list.h"
+#include "nodes/bitmapset.h"
 
 typedef struct JsonbUpdatePaths {
-    char* paths;
+    List* paths;
     int colnum;
 } JsonbUpdatePaths;
 

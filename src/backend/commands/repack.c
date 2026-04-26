@@ -2621,7 +2621,7 @@ apply_concurrent_update(Relation rel, TupleTableSlot *spilled_tuple,
 							 InvalidSnapshot,
 							 InvalidSnapshot,
 							 false,
-							 &tmfd, &lockmode, &update_indexes);
+							 &tmfd, &lockmode, &update_indexes, NULL);
 	if (res != TM_Ok)
 		ereport(ERROR,
 				errmsg("failed to apply concurrent UPDATE"));

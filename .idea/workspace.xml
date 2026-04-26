@@ -104,22 +104,13 @@
   <component name="ChangeListManager">
     <list default="true" id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-15a477d63120ee301f7d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-d31ade51855786ef1ebf.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2026-04-14T15-37-19-0422.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my_init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/my_init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/access/heap/heapam.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/access/heap/heapam.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/access/heap/heapam_handler.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/access/heap/heapam_handler.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/executor/execMain.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/execMain.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/access/table/tableam.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/access/table/tableam.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/commands/repack.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/commands/repack.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/executor/nodeModifyTable.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/nodeModifyTable.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/access/heapam.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/access/heapam.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/access/tableam.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/access/tableam.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/utils/cache/plancache.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/utils/cache/plancache.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/nodes/execnodes.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/nodes/execnodes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/utils/rel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/utils/rel.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -778,7 +769,23 @@
       <workItem from="1776595740745" duration="5712000" />
       <workItem from="1776609120334" duration="1602000" />
       <workItem from="1776625460976" duration="1189000" />
-      <workItem from="1776629706128" duration="7650000" />
+      <workItem from="1776629706128" duration="7950000" />
+      <workItem from="1776709556356" duration="8363000" />
+      <workItem from="1776804775308" duration="3883000" />
+      <workItem from="1776844727185" duration="6801000" />
+      <workItem from="1776938747874" duration="3978000" />
+      <workItem from="1776946800637" duration="3911000" />
+      <workItem from="1776982289137" duration="2911000" />
+      <workItem from="1777022350250" duration="3292000" />
+      <workItem from="1777039611970" duration="10227000" />
+      <workItem from="1777064612377" duration="5535000" />
+      <workItem from="1777132177408" duration="2311000" />
+      <workItem from="1777137477221" duration="5750000" />
+      <workItem from="1777156500542" duration="3867000" />
+      <workItem from="1777190461156" duration="1506000" />
+      <workItem from="1777198737246" duration="3531000" />
+      <workItem from="1777205633047" duration="9052000" />
+      <workItem from="1777226741019" duration="9269000" />
     </task>
     <servers />
   </component>
@@ -796,6 +803,25 @@
     <isAutomaticFoundErrors value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
+          <line>117</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
+          <line>34</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
+          <line>84</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="postgres">
         <watch expression="DatumGetArrayTypeP($c)" />

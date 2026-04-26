@@ -8,16 +8,24 @@
 #include "utils/lsyscache.h"
 #include "nodes/execnodes.h"
 #include "utils/rel.h"
+#include "catalog/pg_type_d.h"
+#include "lib/stringinfo.h"
+#include "nodes/nodes.h"
 
 #define JSONB_SET_FUNC_ID 3305
 #define JSONB_OBJECT_FIELD_TEXT_ID 3214
+#define JSONB_VARTYPE 3802
 
-static char* get_jsonb_path_string(Const* const_object);
-static void try_to_modify_attrs(List* modify_paths, Const* aConst, Bitmapset** bitmapset);
+static List* set_jsonb_update_path(Const* const_object, List* paths);
+static void parse_jsonb_index_path(List** jbPaths, Node* node);
+static void extract_jsonb_index_path(List** jbPaths, OpExpr* opExpr, MemoryContext memoryContext);
+static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmapset** bitmapset, int* attnum);
+static bool is_key_in_index(List* indexes_path, List* modify_path);
 
 JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
     JsonbUpdatePathsInfo* jbInfo = palloc(sizeof(JsonbUpdatePathsInfo));
     jbInfo->args = NIL;
+    jbInfo->bitmapset = NULL;
     jbInfo->checked = true;
 
     ListCell* lc;
@@ -31,9 +39,10 @@ JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
                 Node* optional_const = (Node*) lsecond(funcExpr->args);
 
                 if (optional_const->type == T_Const) {
-                    char* val = get_jsonb_path_string((Const*) optional_const);
                     JsonbUpdatePaths *new_jsonb = palloc(sizeof(JsonbUpdatePaths));
-                    new_jsonb->paths = val;
+                    new_jsonb->paths = NIL;
+                    
+                    new_jsonb->paths = set_jsonb_update_path((Const *) optional_const, new_jsonb->paths);
                     new_jsonb->colnum = get_attnum(oid, targetEntry->resname);
                     jbInfo->args = lappend(jbInfo->args, new_jsonb);
                 }
@@ -47,45 +56,160 @@ JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
     return jbInfo;
 }
 
-static char* get_jsonb_path_string(Const* const_object) {
-    ArrayType* datum = DatumGetArrayTypeP(const_object->constvalue);
-    return text_to_cstring((text*) ARR_DATA_PTR(datum));
+static List* set_jsonb_update_path(Const* const_object, List* paths) {
+    ArrayType *arr = DatumGetArrayTypeP(const_object->constvalue);
+    Datum  *elems;
+    bool   *nulls;
+    int     nelems;
+
+    deconstruct_array(arr,
+                      TEXTOID,
+                      -1, false, 'i',
+                      &elems, &nulls, &nelems);
+
+    StringInfoData buf;
+    initStringInfo(&buf);
+    List* new_path = NIL;
+
+    for (int i = 0; i < nelems; i++) {
+        if (!nulls[i]) {
+            char *str = TextDatumGetCString(elems[i]);
+            new_path = lappend(new_path, str);
+
+        }
+    }
+    return lappend(paths, new_path);
 }
 
 void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relInfo) {
-    Bitmapset* bitmapset = NULL;
-    if (!relInfo->ri_IndexRelationDescs)
+    if (!relInfo->ri_IndexRelationDescs || !jbInfo)
         return;
-    
+
+    Bitmapset* bitmapset = NULL;
+    bool is_key_in_index = false;
+    int attnum;
 
     for (int i = 0; i < relInfo->ri_NumIndices; ++i) {
-        List* indexprs = relInfo->ri_IndexRelationDescs[i]->rd_indexprs;
+        Relation index_relation_desc = relInfo->ri_IndexRelationDescs[i];
+        List* indexprs = index_relation_desc->rd_indexprs;
         if (!indexprs)
             continue;
 
         ListCell* lc;
         foreach(lc, indexprs) {
             OpExpr* opExpr = lfirst(lc);
-            if (opExpr->opfuncid != JSONB_OBJECT_FIELD_TEXT_ID)
-                continue;
 
-            Node* optional_const = (Node*) lsecond(opExpr->args);
-            if (optional_const->type == T_Const) {
-                try_to_modify_attrs(jbInfo->args, (Const *) optional_const, &bitmapset);
+            if (index_relation_desc->rd_jsonbIndexPathsInfo == NULL) {
+                extract_jsonb_index_path(&index_relation_desc->rd_jsonbIndexPathsInfo,
+                                         opExpr,
+                                         index_relation_desc->rd_indexcxt);
+            }
+            if (check_key_in_index(jbInfo->args, index_relation_desc->rd_jsonbIndexPathsInfo, &bitmapset, &attnum)) {
+                is_key_in_index = true;
+                break;
             }
         }
+
+        if (is_key_in_index)
+            break;
     }
 
     jbInfo->checked = true;
-    jbInfo->bitmapset = bitmapset;
+    jbInfo->bitmapset = is_key_in_index ? NULL : bms_add_member(bitmapset, attnum + 7);
 }
 
-static void try_to_modify_attrs(List* modify_paths, Const* aConst, Bitmapset** bitmapset) {
-    char* index_path = text_to_cstring(DatumGetPointer(aConst->constvalue));
+static void extract_jsonb_index_path(List** jbPaths, OpExpr* opExpr, MemoryContext memoryContext) {
+    MemoryContext oldctx;
+
+    oldctx = MemoryContextSwitchTo(memoryContext);
+
+    List* index_jsonb_paths = NIL;
+    parse_jsonb_index_path(&index_jsonb_paths, opExpr);
+    *jbPaths = index_jsonb_paths;
+
+    MemoryContextSwitchTo(oldctx);
+}
+
+static void parse_jsonb_index_path(List** jbPaths, Node* node) {
+    if (!IsA(node, OpExpr))
+        return;
+
+    OpExpr* op = (OpExpr*) node;
     ListCell* lc;
-    foreach(lc, modify_paths) {
-        JsonbUpdatePaths* path = (JsonbUpdatePaths*) lfirst(lc);
-        if (strcmp(index_path, path->paths))
-            *bitmapset = bms_add_member(*bitmapset, path->colnum + 7);
+    if (op->opfuncid != JSONB_OBJECT_FIELD_TEXT_ID) {
+        foreach(lc, op->args) {
+            Node* op_node = lfirst(lc);
+            parse_jsonb_index_path(jbPaths, op_node);
+        }
+        return;
     }
+
+    StringInfoData buf;
+    initStringInfo(&buf);
+    List* buf_list = NIL;
+    int attnum;
+
+    while (IsA(op, OpExpr)) {
+        Node* left = linitial(op->args);
+        if (IsA(left, Var)) {
+            Var* var = (Var*) left;
+            attnum = var->varattno;
+        }
+        Node* right = lsecond(op->args);
+        if (IsA(right, Const)) {
+            Const* c = (Const*) right;
+            char* key = TextDatumGetCString(c->constvalue);
+            buf_list = lcons(key, buf_list);
+        }
+        op = linitial(op->args);
+    }
+    JsonbUpdatePaths* jsonbUpdatePaths = palloc(sizeof (JsonbUpdatePaths));
+    jsonbUpdatePaths->paths = buf_list;
+    jsonbUpdatePaths->colnum = attnum;
+
+    (*jbPaths) = lappend(*jbPaths, jsonbUpdatePaths);
+}
+
+static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmapset** bitmapset, int* attnum) {
+    ListCell* lc;
+    foreach(lc, modify_columns) {
+        JsonbUpdatePaths* jbPaths = (JsonbUpdatePaths*) lfirst(lc);
+
+        ListCell* lc1;
+        foreach(lc1, jbPaths->paths) {
+            List* modified_path = (List*) lfirst(lc1);
+
+            if (is_key_in_index(indexes_paths, modified_path))
+                return true;
+        }
+
+        *attnum = jbPaths->colnum;
+    }
+
+    return false;
+}
+
+static bool is_key_in_index(List* indexes_path, List* modify_path) {
+    ListCell* lc;
+    foreach(lc, indexes_path) {
+        JsonbUpdatePaths* path = lfirst(lc);
+        ListCell* lc1;
+        ListCell* lc2;
+
+        bool key_in_index = true;
+
+        forboth(lc1, path->paths, lc2, modify_path) {
+            char* index_key = (char*) lfirst(lc1);
+            char* modified_key = (char*) lfirst(lc2);
+            if (strcmp(index_key, modified_key)) {
+                key_in_index = false;
+                break;
+            }
+        }
+
+        if (key_in_index)
+            return true;
+    }
+
+    return false;
 }
