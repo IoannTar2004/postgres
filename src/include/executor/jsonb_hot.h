@@ -7,7 +7,7 @@
 
 typedef struct JsonbUpdatePaths {
     List* paths;
-    int colnum;
+    int attnum;
 } JsonbUpdatePaths;
 
 /*

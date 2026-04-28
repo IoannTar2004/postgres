@@ -91,7 +91,7 @@ typedef struct LogicalRepTupleData
 	int			ncols;
 } LogicalRepTupleData;
 
-/* Possible values for LogicalRepTupleData.colstatus[colnum] */
+/* Possible values for LogicalRepTupleData.colstatus[attnum] */
 /* These values are also used in the on-the-wire protocol */
 #define LOGICALREP_COLUMN_NULL		'n'
 #define LOGICALREP_COLUMN_UNCHANGED	'u'

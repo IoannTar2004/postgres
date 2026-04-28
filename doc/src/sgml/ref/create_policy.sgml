@@ -467,8 +467,8 @@ CREATE POLICY <replaceable class="parameter">name</replaceable> ON <replaceable 
    <table id="sql-createpolicy-summary">
     <title>Policies Applied by Command Type</title>
     <tgroup cols="6">
-     <colspec colnum="4" colname="update-using"/>
-     <colspec colnum="5" colname="update-check"/>
+     <colspec attnum="4" colname="update-using"/>
+     <colspec attnum="5" colname="update-check"/>
      <spanspec namest="update-using" nameend="update-check" spanname="update"/>
      <thead>
       <row>

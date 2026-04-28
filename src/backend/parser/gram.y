@@ -2654,7 +2654,7 @@ alter_table_cmd:
 					n->def = $6;
 					$$ = (Node *) n;
 				}
-			/* ALTER TABLE <name> ALTER [COLUMN] <colnum> SET STATISTICS */
+			/* ALTER TABLE <name> ALTER [COLUMN] <attnum> SET STATISTICS */
 			| ALTER opt_column Iconst SET STATISTICS set_statistics_value
 				{
 					AlterTableCmd *n = makeNode(AlterTableCmd);

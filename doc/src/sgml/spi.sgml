@@ -4694,7 +4694,7 @@ HeapTupleHeader SPI_returntuple(HeapTuple <parameter>row</parameter>, TupleDesc 
  <refsynopsisdiv>
 <synopsis>
 HeapTuple SPI_modifytuple(Relation <parameter>rel</parameter>, HeapTuple <parameter>row</parameter>, int <parameter>ncols</parameter>,
-                          int * <parameter>colnum</parameter>, Datum * <parameter>values</parameter>, const char * <parameter>nulls</parameter>)
+                          int * <parameter>attnum</parameter>, Datum * <parameter>values</parameter>, const char * <parameter>nulls</parameter>)
 </synopsis>
  </refsynopsisdiv>
 
@@ -4749,7 +4749,7 @@ HeapTuple SPI_modifytuple(Relation <parameter>rel</parameter>, HeapTuple <parame
    </varlistentry>
 
    <varlistentry>
-    <term><literal>int * <parameter>colnum</parameter></literal></term>
+    <term><literal>int * <parameter>attnum</parameter></literal></term>
     <listitem>
      <para>
       an array of length <parameter>ncols</parameter>, containing the numbers
@@ -4810,7 +4810,7 @@ HeapTuple SPI_modifytuple(Relation <parameter>rel</parameter>, HeapTuple <parame
       <para>
        if <parameter>rel</parameter> is <symbol>NULL</symbol>, or if
        <parameter>row</parameter> is <symbol>NULL</symbol>, or if <parameter>ncols</parameter>
-       is less than or equal to 0, or if <parameter>colnum</parameter> is
+       is less than or equal to 0, or if <parameter>attnum</parameter> is
        <symbol>NULL</symbol>, or if <parameter>values</parameter> is <symbol>NULL</symbol>.
       </para>
      </listitem>
@@ -4820,7 +4820,7 @@ HeapTuple SPI_modifytuple(Relation <parameter>rel</parameter>, HeapTuple <parame
      <term><symbol>SPI_ERROR_NOATTRIBUTE</symbol></term>
      <listitem>
       <para>
-       if <parameter>colnum</parameter> contains an invalid column number (less
+       if <parameter>attnum</parameter> contains an invalid column number (less
        than or equal to 0 or greater than the number of columns in
        <parameter>row</parameter>)
       </para>

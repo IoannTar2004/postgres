@@ -1460,7 +1460,7 @@ group_similar_or_args(PlannerInfo *root, RelOptInfo *rel, RestrictInfo *rinfo)
 
 	/*
 	 * Group similar clauses into single sub-restrictinfo. Side effect: the
-	 * resulting list of restrictions will be sorted by indexnum and colnum.
+	 * resulting list of restrictions will be sorted by indexnum and attnum.
 	 */
 	group_start = 0;
 	for (i = 1; i <= n; i++)

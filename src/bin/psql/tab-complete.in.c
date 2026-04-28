@@ -2513,13 +2513,13 @@ match_previous_words(int pattern_id,
 		set_completion_reference(prev3_wd);
 		COMPLETE_WITH_SCHEMA_QUERY_VERBATIM(Query_for_list_of_attribute_numbers);
 	}
-	/* ALTER INDEX <name> ALTER COLUMN <colnum> */
+	/* ALTER INDEX <name> ALTER COLUMN <attnum> */
 	else if (Matches("ALTER", "INDEX", MatchAny, "ALTER", "COLUMN", MatchAny))
 		COMPLETE_WITH("SET STATISTICS");
-	/* ALTER INDEX <name> ALTER COLUMN <colnum> SET */
+	/* ALTER INDEX <name> ALTER COLUMN <attnum> SET */
 	else if (Matches("ALTER", "INDEX", MatchAny, "ALTER", "COLUMN", MatchAny, "SET"))
 		COMPLETE_WITH("STATISTICS");
-	/* ALTER INDEX <name> ALTER COLUMN <colnum> SET STATISTICS */
+	/* ALTER INDEX <name> ALTER COLUMN <attnum> SET STATISTICS */
 	else if (Matches("ALTER", "INDEX", MatchAny, "ALTER", "COLUMN", MatchAny, "SET", "STATISTICS"))
 	{
 		/* Enforce no completion here, as an integer has to be specified */

@@ -1,7 +1,10 @@
 drop table testt;
-create table testt (id serial primary key, info jsonb not null, col int not null );
-create index on testt ((info->'1'->'2'->'3'->>'4'));
-insert into testt (info, col) values ('{"1": {"2": {"3": {"4": "value"}}}}', 10);
+create table testt (id serial primary key, info jsonb not null, info2 jsonb);
+create index on testt ((info->>'first'));
+-- insert into testt (info) values ('{"1": {"2": "gr"}, "3":  {"4": "geg"}}');
+insert into testt (info) values ('{"firs": "value"}');
+update testt set info = info - 'firs';
+-- update testt set info = info #- '{1,2}' #- '{1,3}';
 -- update testt set col = 40;
 -- update testt set info = jsonb_set(info, '{first}', '"wefwef112323"');
 -- update testt set info = jsonb_set(info, '{first}', '"wefwef1123"');
@@ -10,4 +13,4 @@ insert into testt (info, col) values ('{"1": {"2": {"3": {"4": "value"}}}}', 10)
 -- UPDATE testt SET info = jsonb_set(info, '{first}', to_jsonb(random()::text));
 -- update testt set info = jsonb_set(info, '{second}', '"wefwef11"');
 -- update testt set info = jsonb_set(info, '{second}', '"wefwef112323"');
--- SELECT * FROM heap_page('testt',0);
+SELECT * FROM heap_page('testt',0);

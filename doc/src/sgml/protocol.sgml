@@ -333,7 +333,7 @@
     <title>Supported Protocol Extensions</title>
 
     <tgroup cols="4">
-     <colspec colname="last" colnum="4"/>
+     <colspec colname="last" attnum="4"/>
 
      <thead>
       <row>

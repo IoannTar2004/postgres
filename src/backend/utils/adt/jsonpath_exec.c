@@ -4754,7 +4754,7 @@ JsonTableFetchRow(TableFuncScanState *state)
 
 /*
  * JsonTableGetValue
- *		Return the value for column number 'colnum' for the current row.
+ *		Return the value for column number 'attnum' for the current row.
  *
  * This leaks memory, so be sure to reset often the context in which it's
  * called.

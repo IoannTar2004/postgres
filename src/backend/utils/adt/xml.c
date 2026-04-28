@@ -4913,8 +4913,8 @@ XmlTableSetColumnFilter(TableFuncScanState *state, const char *path, int colnum)
 	/* We require XmlTableSetDocument to have been done already */
 	Assert(xtCxt->xpathcxt != NULL);
 
-	xtCxt->xpathscomp[colnum] = xmlXPathCtxtCompile(xtCxt->xpathcxt, xstr);
-	if (xtCxt->xpathscomp[colnum] == NULL || xtCxt->xmlerrcxt->err_occurred)
+	xtCxt->xpathscomp[attnum] = xmlXPathCtxtCompile(xtCxt->xpathcxt, xstr);
+	if (xtCxt->xpathscomp[attnum] == NULL || xtCxt->xmlerrcxt->err_occurred)
 		xml_ereport(xtCxt->xmlerrcxt, ERROR, ERRCODE_INVALID_ARGUMENT_FOR_XQUERY,
 					"invalid XPath expression");
 #else
@@ -4966,7 +4966,7 @@ XmlTableFetchRow(TableFuncScanState *state)
 
 /*
  * XmlTableGetValue
- *		Return the value for column number 'colnum' for the current row.  If
+ *		Return the value for column number 'attnum' for the current row.  If
  *		column -1 is requested, return representation of the whole row.
  *
  * This leaks memory, so be sure to reset often the context in which it's
@@ -4992,7 +4992,7 @@ XmlTableGetValue(TableFuncScanState *state, int colnum,
 
 	*isnull = false;
 
-	Assert(xtCxt->xpathscomp[colnum] != NULL);
+	Assert(xtCxt->xpathscomp[attnum] != NULL);
 
 	PG_TRY();
 	{
@@ -5004,7 +5004,7 @@ XmlTableGetValue(TableFuncScanState *state, int colnum,
 		xtCxt->xpathcxt->node = cur;
 
 		/* Evaluate column path */
-		xpathobj = xmlXPathCompiledEval(xtCxt->xpathscomp[colnum], xtCxt->xpathcxt);
+		xpathobj = xmlXPathCompiledEval(xtCxt->xpathscomp[attnum], xtCxt->xpathcxt);
 		if (xpathobj == NULL || xtCxt->xmlerrcxt->err_occurred)
 			xml_ereport(xtCxt->xmlerrcxt, ERROR, ERRCODE_INVALID_ARGUMENT_FOR_XQUERY,
 						"could not create XPath object");
@@ -5101,9 +5101,9 @@ XmlTableGetValue(TableFuncScanState *state, int colnum,
 		Assert(cstr || *isnull);
 
 		if (!*isnull)
-			result = InputFunctionCall(&state->in_functions[colnum],
+			result = InputFunctionCall(&state->in_functions[attnum],
 									   cstr,
-									   state->typioparams[colnum],
+									   state->typioparams[attnum],
 									   typmod);
 	}
 	PG_FINALLY();
