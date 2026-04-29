@@ -3,7 +3,7 @@ create table testt (id serial primary key, info jsonb not null, info2 jsonb);
 create index on testt ((info->>'first'));
 -- insert into testt (info) values ('{"1": {"2": "gr"}, "3":  {"4": "geg"}}');
 insert into testt (info) values ('{"firs": "value"}');
-update testt set info = info - 'firs';
+-- update testt set info = info - 'firs';
 -- update testt set info = info #- '{1,2}' #- '{1,3}';
 -- update testt set col = 40;
 -- update testt set info = jsonb_set(info, '{first}', '"wefwef112323"');

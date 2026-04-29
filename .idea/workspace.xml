@@ -104,20 +104,9 @@
   <component name="ChangeListManager">
     <list default="true" id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/src/sgml/errcodes.sgml" beforeDir="false" afterPath="$PROJECT_DIR$/doc/src/sgml/errcodes.sgml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/src/sgml/mvcc.sgml" beforeDir="false" afterPath="$PROJECT_DIR$/doc/src/sgml/mvcc.sgml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/src/sgml/protocol.sgml" beforeDir="false" afterPath="$PROJECT_DIR$/doc/src/sgml/protocol.sgml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/src/sgml/ref/create_policy.sgml" beforeDir="false" afterPath="$PROJECT_DIR$/doc/src/sgml/ref/create_policy.sgml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/src/sgml/spi.sgml" beforeDir="false" afterPath="$PROJECT_DIR$/doc/src/sgml/spi.sgml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my_init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/my_init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/optimizer/path/indxpath.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/optimizer/path/indxpath.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/parser/gram.y" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/parser/gram.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/utils/adt/jsonpath_exec.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/utils/adt/jsonpath_exec.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/utils/adt/xml.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/utils/adt/xml.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bin/psql/tab-complete.in.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/bin/psql/tab-complete.in.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/replication/logicalproto.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/replication/logicalproto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/utils/rel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/utils/rel.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -797,7 +786,10 @@
       <workItem from="1777331969566" duration="1623000" />
       <workItem from="1777369337024" duration="4653000" />
       <workItem from="1777378594645" duration="9063000" />
-      <workItem from="1777394834745" duration="1802000" />
+      <workItem from="1777394834745" duration="2073000" />
+      <workItem from="1777401825573" duration="6361000" />
+      <workItem from="1777449603400" duration="7922000" />
+      <workItem from="1777459382264" duration="1046000" />
     </task>
     <servers />
   </component>
@@ -819,13 +811,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>71</line>
-          <option name="timeStamp" value="72" />
+          <line>251</line>
+          <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>221</line>
-          <option name="timeStamp" value="73" />
+          <line>48</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
+          <line>134</line>
+          <option name="timeStamp" value="98" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
