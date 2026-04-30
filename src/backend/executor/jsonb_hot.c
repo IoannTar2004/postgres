@@ -56,12 +56,16 @@ JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
 
 static void parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args) {
     ListCell* lc;
+    int arg = 0;
+
     foreach(lc, args) {
         Node* node = lfirst(lc);
-        if (type == JSONBOID && IsA(node, Const)) {
-            Const* const_object = (Const*) node;
-            jbInfo->args = list_concat(jbInfo->args, get_jsonb_update_path(attnum, const_object));
-            break;
+        if (type == JSONBOID) {
+            if (IsA(node, Const)) {
+                Const* const_object = (Const*) node;
+                jbInfo->args = list_concat(jbInfo->args, get_jsonb_update_path(attnum, const_object));
+            }
+            if (arg == 1) break;
         }
         if (IsA(node, FuncExpr)) {
             FuncExpr* funcExpr = (FuncExpr*) node;
@@ -71,6 +75,8 @@ static void parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oi
             OpExpr* opExpr = (OpExpr*) node;
             parse_jsonb_update_path(jbInfo, attnum, opExpr->opresulttype, opExpr->args);
         }
+
+        arg++;
     }
 }
 
