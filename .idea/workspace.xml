@@ -103,10 +103,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/my_init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/include/utils/rel.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/utils/rel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/include/executor/jsonb_hot.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -790,6 +790,8 @@
       <workItem from="1777401825573" duration="6361000" />
       <workItem from="1777449603400" duration="7922000" />
       <workItem from="1777459382264" duration="1046000" />
+      <workItem from="1777478850360" duration="637000" />
+      <workItem from="1777539658271" duration="3781000" />
     </task>
     <servers />
   </component>
@@ -807,25 +809,6 @@
     <isAutomaticFoundErrors value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>251</line>
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>48</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>134</line>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="postgres">
         <watch expression="DatumGetArrayTypeP($c)" />

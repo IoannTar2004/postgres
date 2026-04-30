@@ -6,7 +6,7 @@
 #include "nodes/bitmapset.h"
 
 typedef struct JsonbUpdatePaths {
-    List* paths;
+    List* path;
     int attnum;
 } JsonbUpdatePaths;
 
