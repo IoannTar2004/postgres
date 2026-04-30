@@ -19,7 +19,7 @@
     new_path->path = NIL;                                           \
     new_path->attnum = colnum;
 
-static void parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args);
+static bool parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args);
 static List* get_jsonb_update_path(int attnum, Const* const_object);
 static List* extract_jsonboid_update_paths(Jsonb* jb, int attnum);
 static void parse_jsonb_index_path(List** jbPaths, Node* node);
@@ -54,30 +54,43 @@ JsonbUpdatePathsInfo* jsonb_update_paths_checks(List* plan, Oid oid) {
     return jbInfo;
 }
 
-static void parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args) {
+static bool parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args) {
     ListCell* lc;
     int arg = 0;
+    bool state = true;
 
     foreach(lc, args) {
         Node* node = lfirst(lc);
         if (type == JSONBOID) {
-            if (IsA(node, Const)) {
-                Const* const_object = (Const*) node;
-                jbInfo->args = list_concat(jbInfo->args, get_jsonb_update_path(attnum, const_object));
+            if (arg == 1) {
+                if (IsA(node, Const)) {
+                    Const* const_object = (Const*) node;
+                    jbInfo->args = list_concat(jbInfo->args, get_jsonb_update_path(attnum, const_object));
+                } else {
+                    list_free_deep(jbInfo->args);
+                    jbInfo->args = NIL;
+                    return false;
+                }
+                break;
             }
-            if (arg == 1) break;
         }
+
         if (IsA(node, FuncExpr)) {
             FuncExpr* funcExpr = (FuncExpr*) node;
-            parse_jsonb_update_path(jbInfo, attnum, funcExpr->funcresulttype, funcExpr->args);
+            state = parse_jsonb_update_path(jbInfo, attnum, funcExpr->funcresulttype, funcExpr->args);
 
         } else if (IsA(node, OpExpr)) {
             OpExpr* opExpr = (OpExpr*) node;
-            parse_jsonb_update_path(jbInfo, attnum, opExpr->opresulttype, opExpr->args);
+            state = parse_jsonb_update_path(jbInfo, attnum, opExpr->opresulttype, opExpr->args);
         }
+
+        if (!state)
+            return false;
 
         arg++;
     }
+
+    return true;
 }
 
 static List* get_jsonb_update_path(int attnum, Const* const_object) {
@@ -136,7 +149,6 @@ static List* extract_jsonboid_update_paths(Jsonb* jb, int attnum) {
             jsonb_update_path_init(new_path, attnum)
             new_path->path = current_path;
             jbPaths = lappend(jbPaths, new_path);
-            list_free_deep(current_path);
             current_path = NIL;
         }
     }
