@@ -38,8 +38,9 @@ static List* extract_jsonboid_update_paths(Jsonb* jb, int attnum);
 static bool jsonb_index_path_walker(Node* node, void* ctx);
 static bool is_valid_expression(Oid id);
 static bool parse_jsonb_index_path(List** jbPaths, Node* node);
+static void column_is_index(List** jbPaths, ResultRelInfo* resultRelInfo);
 static void set_list_with_null(List** paths);
-static void extract_jsonb_index_path(List** jbPaths, Node* opExpr, MemoryContext memoryContext);
+static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext memoryContext, ResultRelInfo* resultRelInfo);
 static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmapset** bitmapset, int* attnum);
 static bool is_key_in_index(List* indexes_path, List* modify_path, int attnum);
 
@@ -183,7 +184,7 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
         return;
 
     Bitmapset* bitmapset = NULL;
-    bool is_key_in_index = false;
+    bool is_key_in_index = true;
     int attnum;
 
     for (int i = 0; i < relInfo->ri_NumIndices; ++i) {
@@ -194,14 +195,17 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
 
         ListCell* lc;
         foreach(lc, indexprs) {
+            is_key_in_index = false;
             Node* opExpr = lfirst(lc);
 
             if (index_relation_desc->rd_jsonbIndexPathsInfo == NULL) {
                 extract_jsonb_index_path(&index_relation_desc->rd_jsonbIndexPathsInfo,
                                          opExpr,
-                                         index_relation_desc->rd_indexcxt);
+                                         index_relation_desc->rd_indexcxt, relInfo);
             }
-            if (check_key_in_index(jbInfo->args, index_relation_desc->rd_jsonbIndexPathsInfo, &bitmapset, &attnum)) {
+
+            List* index_list = index_relation_desc->rd_jsonbIndexPathsInfo;
+            if (linitial(index_list) == NULL || check_key_in_index(jbInfo->args, index_list, &bitmapset, &attnum)) {
                 is_key_in_index = true;
                 break;
             }
@@ -215,13 +219,32 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
     jbInfo->bitmapset = is_key_in_index ? NULL : bms_add_member(bitmapset, attnum + 7);
 }
 
+static void column_is_index(List** jbPaths, ResultRelInfo* resultRelInfo) {
+    ListCell* lc;
+    foreach(lc, *jbPaths) {
+        JsonbUpdatePaths *jbPath = lfirst(lc);
+        for (int i = 0; i < resultRelInfo->ri_NumIndices; ++i) {
+            int2vector* indkey = &resultRelInfo->ri_IndexRelationDescs[i]->rd_index->indkey;
+            if (indkey->dim1 == 1 && indkey->values[0] == 0)
+                continue;
+
+            for (int j = 0; j < indkey->dim1; ++j) {
+                if (jbPath->attnum == indkey->values[j]) {
+                    set_list_with_null(jbPaths);
+                    return;
+                }
+            }
+        }
+    }
+}
+
 static void set_list_with_null(List** paths) {
     list_free_deep(*paths);
     *paths = NIL;
     *paths = lappend(*paths, NULL);
 }
 
-static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext memoryContext) {
+static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext memoryContext, ResultRelInfo* resultRelInfo) {
     MemoryContext oldctx;
 
     oldctx = MemoryContextSwitchTo(memoryContext);
@@ -229,6 +252,7 @@ static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext m
 
     JsonbIndexCtx jsonbIndexCtx;
     List* paths = NIL;
+
     jsonbIndexCtx.jsonb_paths = paths;
 
     if (IsA(node, OpExpr))
@@ -244,6 +268,8 @@ static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext m
         expression_tree_walker(node, jsonb_index_path_walker, &jsonbIndexCtx);
 
     *jbPaths = jsonbIndexCtx.jsonb_paths;
+
+    column_is_index(jbPaths, resultRelInfo);
 
     MemoryContextSwitchTo(oldctx);
 }
@@ -334,9 +360,6 @@ static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmap
 }
 
 static bool is_key_in_index(List* indexes_path, List* modify_path, int attnum) {
-    if (linitial(indexes_path) == NULL)
-        return true;
-
     ListCell* lc;
     foreach(lc, indexes_path) {
         JsonbUpdatePaths* path = lfirst(lc);
