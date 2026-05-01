@@ -104,6 +104,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85043e7b-bce5-4d04-af0e-ad0df247bdb0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_test_sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/my_test_sql.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/executor/jsonb_hot.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -791,7 +792,9 @@
       <workItem from="1777478850360" duration="637000" />
       <workItem from="1777539658271" duration="8068000" />
       <workItem from="1777551732955" duration="1165000" />
-      <workItem from="1777558325168" duration="3614000" />
+      <workItem from="1777558325168" duration="4361000" />
+      <workItem from="1777578021932" duration="19749000" />
+      <workItem from="1777621676313" duration="13526000" />
     </task>
     <servers />
   </component>
@@ -813,13 +816,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>61</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/backend/executor/jsonb_hot.c</url>
-          <line>134</line>
-          <option name="timeStamp" value="8" />
+          <line>66</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

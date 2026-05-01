@@ -10,6 +10,6 @@ DO $$
     BEGIN
         FOR i IN 1..3000 LOOP
                 UPDATE testt
-                SET info = jsonb_set(info, '{second}', to_jsonb(i::text));
+                SET info = jsonb_set(jsonb_set(info, '{second}', '"val"'), '{third}', to_jsonb(i::text));
             END LOOP;
     END $$;

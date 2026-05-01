@@ -12,18 +12,34 @@
 #include "catalog/pg_type_d.h"
 #include "lib/stringinfo.h"
 #include "nodes/nodes.h"
+#include "nodes/nodeFuncs.h"
 
 #define JSONB_OBJECT_FIELD_TEXT_ID 3214
+#define JSONB_ARRAY_ELEMENT 3215
+#define JSONB_ARRAY_ELEMENT_TEXT 3216
+#define JSONB_EXTRACT_PATH 3217
+#define JSONB_OBJECT_FIELD 3478
+#define JSONB_EXTRACT_PATH_TEXT 3940
+
 #define jsonb_update_path_init(var, colnum) \
     JsonbUpdatePaths* var = palloc(sizeof (JsonbUpdatePaths)); \
     new_path->path = NIL;                                           \
     new_path->attnum = colnum;
 
+typedef struct {
+    bool is_valid_func;
+    List* jsonb_paths;
+} JsonbIndexCtx;
+
 static bool parse_jsonb_update_path(JsonbUpdatePathsInfo* jbInfo, int attnum, Oid type, List* args);
 static List* get_jsonb_update_path(int attnum, Const* const_object);
+static List* jsonb_deconstruct_array(int attnum, Const* const_object);
 static List* extract_jsonboid_update_paths(Jsonb* jb, int attnum);
-static void parse_jsonb_index_path(List** jbPaths, Node* node);
-static void extract_jsonb_index_path(List** jbPaths, OpExpr* opExpr, MemoryContext memoryContext);
+static bool jsonb_index_path_walker(Node* node, void* ctx);
+static bool is_valid_expression(Oid id);
+static bool parse_jsonb_index_path(List** jbPaths, Node* node);
+static void set_list_with_null(List** paths);
+static void extract_jsonb_index_path(List** jbPaths, Node* opExpr, MemoryContext memoryContext);
 static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmapset** bitmapset, int* attnum);
 static bool is_key_in_index(List* indexes_path, List* modify_path, int attnum);
 
@@ -107,26 +123,32 @@ static List* get_jsonb_update_path(int attnum, Const* const_object) {
         paths = extract_jsonboid_update_paths(jb, attnum);
 
     } else {
-        ArrayType *arr = DatumGetArrayTypeP(const_object->constvalue);
-        Datum  *elems;
-        bool   *nulls;
-        int     nelems;
-
-        deconstruct_array(arr,
-                          TEXTOID,
-                          -1, false, 'i',
-                          &elems, &nulls, &nelems);
-
         jsonb_update_path_init(new_path, attnum)
-
-        for (int i = 0; i < nelems; i++) {
-            if (!nulls[i]) {
-                char *str = TextDatumGetCString(elems[i]);
-                new_path->path = lappend(new_path->path, str);
-            }
-        }
-
+        new_path->path = jsonb_deconstruct_array(attnum, const_object);
         paths = lappend(paths, new_path);
+    }
+
+    return paths;
+}
+
+static List* jsonb_deconstruct_array(int attnum, Const* const_object) {
+    List* paths = NIL;
+
+    ArrayType *arr = DatumGetArrayTypeP(const_object->constvalue);
+    Datum  *elems;
+    bool   *nulls;
+    int     nelems;
+
+    deconstruct_array(arr,
+                      TEXTOID,
+                      -1, false, 'i',
+                      &elems, &nulls, &nelems);
+
+    for (int i = 0; i < nelems; i++) {
+        if (!nulls[i]) {
+            char *str = TextDatumGetCString(elems[i]);
+            paths = lappend(paths, str);
+        }
     }
 
     return paths;
@@ -172,7 +194,7 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
 
         ListCell* lc;
         foreach(lc, indexprs) {
-            OpExpr* opExpr = lfirst(lc);
+            Node* opExpr = lfirst(lc);
 
             if (index_relation_desc->rd_jsonbIndexPathsInfo == NULL) {
                 extract_jsonb_index_path(&index_relation_desc->rd_jsonbIndexPathsInfo,
@@ -193,56 +215,107 @@ void compare_paths_and_indexes(JsonbUpdatePathsInfo* jbInfo, ResultRelInfo* relI
     jbInfo->bitmapset = is_key_in_index ? NULL : bms_add_member(bitmapset, attnum + 7);
 }
 
-static void extract_jsonb_index_path(List** jbPaths, OpExpr* opExpr, MemoryContext memoryContext) {
+static void set_list_with_null(List** paths) {
+    list_free_deep(*paths);
+    *paths = NIL;
+    *paths = lappend(*paths, NULL);
+}
+
+static void extract_jsonb_index_path(List** jbPaths, Node* node, MemoryContext memoryContext) {
     MemoryContext oldctx;
 
     oldctx = MemoryContextSwitchTo(memoryContext);
 
-    List* index_jsonb_paths = NIL;
-    parse_jsonb_index_path(&index_jsonb_paths, opExpr);
-    *jbPaths = index_jsonb_paths;
+
+    JsonbIndexCtx jsonbIndexCtx;
+    List* paths = NIL;
+    jsonbIndexCtx.jsonb_paths = paths;
+
+    if (IsA(node, OpExpr))
+        jsonbIndexCtx.is_valid_func = is_valid_expression(((OpExpr*) node)->opfuncid);
+    else if (IsA(node, FuncExpr))
+        jsonbIndexCtx.is_valid_func = is_valid_expression(((FuncExpr*) node)->funcid);
+    else
+        jsonbIndexCtx.is_valid_func = false;
+
+    if (jsonbIndexCtx.is_valid_func)
+        parse_jsonb_index_path(&jsonbIndexCtx.jsonb_paths, node);
+    else
+        expression_tree_walker(node, jsonb_index_path_walker, &jsonbIndexCtx);
+
+    *jbPaths = jsonbIndexCtx.jsonb_paths;
 
     MemoryContextSwitchTo(oldctx);
 }
 
-static void parse_jsonb_index_path(List** jbPaths, Node* node) {
-    if (!IsA(node, OpExpr))
-        return;
+static bool is_valid_expression(Oid id) {
+    switch (id) {
+        case JSONB_OBJECT_FIELD_TEXT_ID:
+        case JSONB_ARRAY_ELEMENT:
+        case JSONB_ARRAY_ELEMENT_TEXT:
+        case JSONB_OBJECT_FIELD:
+        case JSONB_EXTRACT_PATH:
+        case JSONB_EXTRACT_PATH_TEXT:
+            return true;
+        default:
+            return false;
+    }
+}
 
-    OpExpr* op = (OpExpr*) node;
-    ListCell* lc;
-    if (op->opfuncid != JSONB_OBJECT_FIELD_TEXT_ID) {
-        foreach(lc, op->args) {
-            Node* op_node = lfirst(lc);
-            parse_jsonb_index_path(jbPaths, op_node);
+static bool jsonb_index_path_walker(Node* node, void* ctx) {
+    JsonbIndexCtx* jsonbIndexCtx = (JsonbIndexCtx*) ctx;
+
+    if (IsA(node, Var)) {
+        Var* nodeVar = (Var*) node;
+        if (nodeVar->vartype == JSONBOID) {
+            set_list_with_null(&jsonbIndexCtx->jsonb_paths);
+            return true;
         }
-        return;
     }
 
-    StringInfoData buf;
-    initStringInfo(&buf);
-    List* buf_list = NIL;
-    int attnum;
+    if (IsA(node, FuncExpr) && is_valid_expression(((FuncExpr*) node)->funcid) ||
+            IsA(node, OpExpr) && is_valid_expression(((OpExpr*) node)->opfuncid)) {
 
-    while (IsA(op, OpExpr)) {
-        Node* left = linitial(op->args);
+        return !parse_jsonb_index_path(&jsonbIndexCtx->jsonb_paths, node);
+    }
+
+    return expression_tree_walker(node, jsonb_index_path_walker, jsonbIndexCtx);
+}
+
+static bool parse_jsonb_index_path(List** jbPaths, Node* node) {
+    JsonbUpdatePaths* jsonbUpdatePaths = palloc(sizeof (JsonbUpdatePaths));
+    jsonbUpdatePaths->path = NIL;
+    Node* current = node;
+
+    while (IsA(current, OpExpr) || IsA(current, FuncExpr)) {
+        List* args = IsA(current, OpExpr) ? ((OpExpr*) current)->args : ((FuncExpr*) current)->args;
+        Oid funcid = IsA(current, OpExpr) ? ((OpExpr*) current)->opfuncid : ((FuncExpr*) current)->funcid;
+
+        if (!is_valid_expression(funcid)) {
+            set_list_with_null(jbPaths);
+            return false;
+        }
+
+        Node* left = linitial(args);
         if (IsA(left, Var)) {
             Var* var = (Var*) left;
-            attnum = var->varattno;
+            jsonbUpdatePaths->attnum = var->varattno;
         }
-        Node* right = lsecond(op->args);
+        Node* right = lsecond(args);
         if (IsA(right, Const)) {
             Const* c = (Const*) right;
-            char* key = TextDatumGetCString(c->constvalue);
-            buf_list = lcons(key, buf_list);
+            if (c->consttype == TEXTARRAYOID)
+                jsonbUpdatePaths->path = jsonb_deconstruct_array(jsonbUpdatePaths->attnum, c);
+            else if (c->consttype == TEXTOID) {
+                char* key = TextDatumGetCString(c->constvalue);
+                jsonbUpdatePaths->path = lcons(key, jsonbUpdatePaths->path);
+            }
         }
-        op = linitial(op->args);
+        current = linitial(args);
     }
-    JsonbUpdatePaths* jsonbUpdatePaths = palloc(sizeof (JsonbUpdatePaths));
-    jsonbUpdatePaths->path = buf_list;
-    jsonbUpdatePaths->attnum = attnum;
 
     (*jbPaths) = lappend(*jbPaths, jsonbUpdatePaths);
+    return true;
 }
 
 static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmapset** bitmapset, int* attnum) {
@@ -261,6 +334,9 @@ static bool check_key_in_index(List* modify_columns, List* indexes_paths, Bitmap
 }
 
 static bool is_key_in_index(List* indexes_path, List* modify_path, int attnum) {
+    if (linitial(indexes_path) == NULL)
+        return true;
+
     ListCell* lc;
     foreach(lc, indexes_path) {
         JsonbUpdatePaths* path = lfirst(lc);
