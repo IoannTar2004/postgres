@@ -1,4 +1,0 @@
-C:\Windows\system32\wsl.exe --distribution Ubuntu --exec /bin/bash -c "export CMAKE_COLOR_DIAGNOSTICS=ON && export CLION_IDE=TRUE && export JETBRAINS_IDE=TRUE && cd /home/ivan_kanga/univer/diplom/postgres/cmake-build-debug && /usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -G 'CodeBlocks - Unix Makefiles' -S /home/ivan_kanga/univer/diplom/postgres -B /home/ivan_kanga/univer/diplom/postgres/cmake-build-debug"
--- Configuring done
--- Generating done
--- Build files have been written to: /home/ivan_kanga/univer/diplom/postgres/cmake-build-debug

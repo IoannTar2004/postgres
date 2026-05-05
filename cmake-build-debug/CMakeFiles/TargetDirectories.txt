@@ -1,3 +1,0 @@
-/home/ivan_kanga/univer/diplom/postgres/cmake-build-debug/CMakeFiles/postgres.dir
-/home/ivan_kanga/univer/diplom/postgres/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ivan_kanga/univer/diplom/postgres/cmake-build-debug/CMakeFiles/rebuild_cache.dir
