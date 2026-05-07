@@ -5775,6 +5775,7 @@ ExecInitModifyTable(ModifyTable *node, EState *estate, int eflags)
 		estate->es_auxmodifytables = lcons(mtstate,
 										   estate->es_auxmodifytables);
 
+    if (mtstate->operation == CMD_UPDATE)
         mtstate->resultRelInfo->ri_jsonUpdatePathInfo =
                 jsonb_update_paths_checks(subplan->targetlist, rel->rd_id);
 
