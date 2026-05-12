@@ -2766,7 +2766,7 @@ ExecUpdate(ModifyTableContext *context, ResultRelInfo *resultRelInfo,
 		return NULL;
 
     if (!resultRelInfo->ri_jsonUpdatePathInfo->checked)
-        compare_paths_and_indexes(resultRelInfo->ri_jsonUpdatePathInfo, resultRelInfo);
+        compare_modified_and_indexed_keys(resultRelInfo->ri_jsonUpdatePathInfo, resultRelInfo);
 
 	/* INSTEAD OF ROW UPDATE Triggers */
 	if (resultRelInfo->ri_TrigDesc &&
@@ -5777,7 +5777,7 @@ ExecInitModifyTable(ModifyTable *node, EState *estate, int eflags)
 
     if (mtstate->operation == CMD_UPDATE)
         mtstate->resultRelInfo->ri_jsonUpdatePathInfo =
-                jsonb_update_paths_checks(subplan->targetlist, rel->rd_id);
+                jsonb_update_keys_checks(subplan->targetlist, rel->rd_id);
 
 	return mtstate;
 }

@@ -52,7 +52,7 @@ typedef struct ExprState ExprState;
 typedef struct ExprContext ExprContext;
 typedef struct HTAB HTAB;
 typedef struct Instrumentation Instrumentation;
-typedef struct JsonbUpdatePathsInfo JsonbUpdatePathsInfo;
+typedef struct JsonbUpdateKeysInfo JsonbUpdateKeysInfo;
 typedef struct pairingheap pairingheap;
 typedef struct PlanState PlanState;
 typedef struct QueryEnvironment QueryEnvironment;
@@ -665,7 +665,7 @@ typedef struct ResultRelInfo
 	 */
 	List	   *ri_ancestorResultRels;
 
-    JsonbUpdatePathsInfo* ri_jsonUpdatePathInfo;
+    JsonbUpdateKeysInfo* ri_jsonUpdatePathInfo;
 
 } ResultRelInfo;
 
