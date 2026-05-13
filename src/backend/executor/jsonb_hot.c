@@ -17,7 +17,6 @@
 // Allowed JSONB Function in update operations
 #define JSONB_SET 3305
 #define JSONB_SET_LAX 5054
-#define JSONB_DELETE_ARRAY 3287
 #define JSONB_DELETE_PATH 3304
 #define JSONB_DELETE 3302
 #define JSONB_CONCAT 3301
@@ -35,16 +34,6 @@
     JsonbKey* var = palloc(sizeof (JsonbKey)); \
     var->key = NIL;                                           \
     var->attnum = colnum;
-
-typedef struct {
-    JsonbUpdateKeysInfo jbInfo;
-    int attnum;
-} JsonbUpdateCtx;
-
-typedef struct {
-    bool is_valid_func;
-    List* jsonb_keys;
-} JsonbIndexCtx;
 
 static bool parse_jsonb_update_key(JsonbUpdateKeysInfo* jbInfo, int attnum, Oid id, List* args);
 static bool is_valid_update_function(Oid id);
@@ -93,7 +82,6 @@ static bool is_valid_update_function(Oid id) {
         case JSONB_SET_LAX:
         case JSONB_DELETE:
         case JSONB_DELETE_PATH:
-        case JSONB_DELETE_ARRAY:
         case JSONB_CONCAT:
         case JSONB_INSERT:
             return true;
@@ -104,39 +92,41 @@ static bool is_valid_update_function(Oid id) {
 }
 
 static bool parse_jsonb_update_key(JsonbUpdateKeysInfo* jbInfo, int attnum, Oid id, List* args) {
+    if (!is_valid_update_function(id))
+        return false;
+
     ListCell* lc;
     int arg = 0;
     bool state = true;
 
     foreach(lc, args) {
         Node* node = lfirst(lc);
-        if (is_valid_update_function(id)) {
-            if (IsA(node, Var)) {
-                Var* var = (Var*) node;
-                if (var->varattno != attnum) {
-                    list_free_deep(jbInfo->args);
-                    jbInfo->args = NIL;
-                    return false;
-                }
+        if (IsA(node, Var)) {
+            Var* var = (Var*) node;
+            if (var->varattno != attnum) {
+                list_free_deep(jbInfo->args);
+                jbInfo->args = NIL;
+                return false;
+            }
 
-            } else if (IsA(node, Const)) {
+        } else if (arg == 1) {
+            if (IsA(node, Const)) {
                 Const* const_object = (Const*) node;
                 jbInfo->args = list_concat(jbInfo->args, get_jsonb_update_key(attnum, const_object));
+                break;
             } else {
                 list_free_deep(jbInfo->args);
                 jbInfo->args = NIL;
                 return false;
             }
-            break;
-        }
-
-        if (IsA(node, FuncExpr)) {
+        } else if (IsA(node, FuncExpr)) {
             FuncExpr* funcExpr = (FuncExpr*) node;
-            state = parse_jsonb_update_key(jbInfo, attnum, funcExpr->funcresulttype, funcExpr->args);
-
+            state = parse_jsonb_update_key(jbInfo, attnum, funcExpr->funcid, funcExpr->args);
         } else if (IsA(node, OpExpr)) {
             OpExpr* opExpr = (OpExpr*) node;
-            state = parse_jsonb_update_key(jbInfo, attnum, opExpr->opresulttype, opExpr->args);
+            state = parse_jsonb_update_key(jbInfo, attnum, opExpr->opfuncid, opExpr->args);
+        } else {
+            return false;
         }
 
         if (!state)
@@ -292,25 +282,18 @@ static void extract_jsonb_index_key(List** jbKeys, Node* node, MemoryContext mem
 
     oldctx = MemoryContextSwitchTo(memoryContext);
 
-
-    JsonbIndexCtx jsonbIndexCtx;
-    List* keys = NIL;
-
-    jsonbIndexCtx.jsonb_keys = keys;
-
+    bool is_valid_func;
     if (IsA(node, OpExpr))
-        jsonbIndexCtx.is_valid_func = is_valid_expression(((OpExpr*) node)->opfuncid);
+        is_valid_func = is_valid_expression(((OpExpr*) node)->opfuncid);
     else if (IsA(node, FuncExpr))
-        jsonbIndexCtx.is_valid_func = is_valid_expression(((FuncExpr*) node)->funcid);
+        is_valid_func = is_valid_expression(((FuncExpr*) node)->funcid);
     else
-        jsonbIndexCtx.is_valid_func = false;
+        is_valid_func = false;
 
-    if (jsonbIndexCtx.is_valid_func)
-        parse_jsonb_index_key(&jsonbIndexCtx.jsonb_keys, node);
+    if (is_valid_func)
+        parse_jsonb_index_key(jbKeys, node);
     else
-        expression_tree_walker(node, jsonb_index_key_walker, &jsonbIndexCtx);
-
-    *jbKeys = jsonbIndexCtx.jsonb_keys;
+        expression_tree_walker(node, jsonb_index_key_walker, jbKeys);
 
     MemoryContextSwitchTo(oldctx);
 }
@@ -323,6 +306,7 @@ static bool is_valid_expression(Oid id) {
         case JSONB_OBJECT_FIELD:
         case JSONB_EXTRACT_PATH:
         case JSONB_EXTRACT_PATH_TEXT:
+        case JSONB_CONCAT:
             return true;
         default:
             return false;
@@ -330,12 +314,12 @@ static bool is_valid_expression(Oid id) {
 }
 
 static bool jsonb_index_key_walker(Node* node, void* ctx) {
-    JsonbIndexCtx* jsonbIndexCtx = (JsonbIndexCtx*) ctx;
+    List** jsonb_keys = (List **) ctx;
 
     if (IsA(node, Var)) {
         Var* nodeVar = (Var*) node;
         if (nodeVar->vartype == JSONBOID) {
-            set_list_with_null(&jsonbIndexCtx->jsonb_keys);
+            set_list_with_null(jsonb_keys);
             return true;
         }
     }
@@ -343,10 +327,10 @@ static bool jsonb_index_key_walker(Node* node, void* ctx) {
     if (IsA(node, FuncExpr) && is_valid_expression(((FuncExpr*) node)->funcid) ||
             IsA(node, OpExpr) && is_valid_expression(((OpExpr*) node)->opfuncid)) {
 
-        return !parse_jsonb_index_key(&jsonbIndexCtx->jsonb_keys, node);
+        return !parse_jsonb_index_key(jsonb_keys, node);
     }
 
-    return expression_tree_walker(node, jsonb_index_key_walker, jsonbIndexCtx);
+    return expression_tree_walker(node, jsonb_index_key_walker, jsonb_keys);
 }
 
 static bool parse_jsonb_index_key(List** jbKeys, Node* node) {
