@@ -46,7 +46,7 @@ static bool parse_jsonb_index_key(List** jbKeys, Node* node);
 static bool column_is_index(List* jbKeys, Relation relation);
 static void set_list_with_null(List** keys);
 static void extract_jsonb_index_key(List** jbKeys, Node* node, MemoryContext memoryContext, ResultRelInfo* resultRelInfo);
-static bool check_key_in_index(List* modify_columns, List* indexes_keys, Bitmapset** bitmapset, int* attnum);
+static bool check_key_in_index(List* modify_columns, List* indexes_keys, Bitmapset** bitmapset);
 static bool is_key_in_index(List* indexes_key, List* modify_key, int attnum);
 
 JsonbUpdateKeysInfo* jsonb_update_keys_checks(List* plan, Oid oid) {
@@ -239,7 +239,7 @@ void compare_modified_and_indexed_keys(JsonbUpdateKeysInfo* jbInfo, ResultRelInf
             }
 
             List* index_list = index_relation_desc->rd_jsonbIndexKeysInfo;
-            if (linitial(index_list) == NULL || check_key_in_index(jbInfo->args, index_list, &bitmapset, &attnum)) {
+            if (linitial(index_list) == NULL || check_key_in_index(jbInfo->args, index_list, &bitmapset)) {
                 is_key_in_index = true;
                 break;
             }
@@ -250,7 +250,7 @@ void compare_modified_and_indexed_keys(JsonbUpdateKeysInfo* jbInfo, ResultRelInf
     }
 
     jbInfo->checked = true;
-    jbInfo->bitmapset = is_key_in_index ? NULL : bms_add_member(bitmapset, attnum + 7);
+    jbInfo->bitmapset = is_key_in_index ? NULL : bitmapset;
 }
 
 static bool column_is_index(List* jbKeys, Relation relation) {
@@ -369,7 +369,7 @@ static bool parse_jsonb_index_key(List** jbKeys, Node* node) {
     return true;
 }
 
-static bool check_key_in_index(List* modify_columns, List* indexes_keys, Bitmapset** bitmapset, int* attnum) {
+static bool check_key_in_index(List* modify_columns, List* indexes_keys, Bitmapset** bitmapset) {
     ListCell* lc;
     foreach(lc, modify_columns) {
         JsonbKey* jbKeys = (JsonbKey*) lfirst(lc);
@@ -377,8 +377,8 @@ static bool check_key_in_index(List* modify_columns, List* indexes_keys, Bitmaps
 
         if (is_key_in_index(indexes_keys, jbKeys->key, jbKeys->attnum))
             return true;
-
-        *attnum = jbKeys->attnum;
+        else
+            *bitmapset = bms_add_member(*bitmapset, jbKeys->attnum + 7);
     }
 
     return false;

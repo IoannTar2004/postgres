@@ -3389,7 +3389,6 @@ heap_update(Relation relation, const ItemPointerData *otid, HeapTuple newtup,
             modified_attrs = NULL;
     }
 
-
 	/*
 	 * If we're not updating any "key" column, we can grab a weaker lock type.
 	 * This allows for more concurrency when we are running simultaneously
