@@ -213,7 +213,6 @@ void compare_modified_and_indexed_keys(JsonbUpdateKeysInfo* jbInfo, ResultRelInf
 
     Bitmapset* bitmapset = NULL;
     bool is_key_in_index = true;
-    int attnum;
 
     for (int i = 0; i < relInfo->ri_NumIndices; ++i) {
         Relation index_relation_desc = relInfo->ri_IndexRelationDescs[i];
