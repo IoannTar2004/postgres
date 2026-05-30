@@ -238,7 +238,8 @@ void compare_modified_and_indexed_keys(JsonbUpdateKeysInfo* jbInfo, ResultRelInf
             }
 
             List* index_list = index_relation_desc->rd_jsonbIndexKeysInfo;
-            if (linitial(index_list) == NULL || check_key_in_index(jbInfo->args, index_list, &bitmapset)) {
+            if (index_list != NULL &&
+                linitial(index_list) == NULL || check_key_in_index(jbInfo->args, index_list, &bitmapset)) {
                 is_key_in_index = true;
                 break;
             }
