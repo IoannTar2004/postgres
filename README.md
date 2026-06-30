@@ -23,7 +23,6 @@ look at our web site located at <https://www.postgresql.org/>.
 ---
 
 Link to the project demo:
-
 https://drive.google.com/file/d/1-MO81vfn2eS8FwG73OnMUUnqrI25XXGl/view?usp=sharing
 
 Patch file: [jsonb_hot.patch](jsonb_hot.patch)
