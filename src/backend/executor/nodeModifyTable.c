@@ -5777,7 +5777,7 @@ ExecInitModifyTable(ModifyTable *node, EState *estate, int eflags)
 
     if (mtstate->operation == CMD_UPDATE)
         mtstate->resultRelInfo->ri_jsonUpdatePathInfo =
-                jsonb_update_keys_checks(subplan->targetlist, rel->rd_id);
+                jsonb_update_keys_extract(subplan->targetlist, rel->rd_id);
 
 	return mtstate;
 }

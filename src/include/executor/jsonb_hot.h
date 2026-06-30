@@ -20,7 +20,7 @@ typedef struct JsonbUpdateKeysInfo {
     bool checked;
 } JsonbUpdateKeysInfo;
 
-JsonbUpdateKeysInfo* jsonb_update_keys_checks(List* plan, Oid oid);
+JsonbUpdateKeysInfo* jsonb_update_keys_extract(List* plan, Oid oid);
 void compare_modified_and_indexed_keys(JsonbUpdateKeysInfo* jbInfo, struct ResultRelInfo *relInfo);
 
 #endif
